@@ -20,7 +20,7 @@ def get_image_url():
   req = requests.get("https://inspirobot.me/api?generate=true")
   return req.text
 
-def main():
+def lambda_handler(event, context):
   client = slack.WebClient(token=os.environ["slack_token"])
   img_url = get_image_url()
   send_slack_msg(client, "Here is some inspiration for the day:")
@@ -28,4 +28,4 @@ def main():
 
 
 if __name__ == "__main__":
-  main()
+  lambda_handler(None, None)
