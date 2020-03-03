@@ -1,6 +1,14 @@
 import os
 import requests
 import slack
+import random
+
+GREETINGS = [
+  "Here is some inspiration for the day:",
+  "Just a little inspiration for you:",
+  "Here's something to think about:",
+  "Want some inspiration? Look no further:"
+]
 
 def send_slack_msg(client, msg):
   client.chat_postMessage(
@@ -23,7 +31,7 @@ def get_image_url():
 def lambda_handler(event, context):
   client = slack.WebClient(token=os.environ["slack_token"])
   img_url = get_image_url()
-  send_slack_msg(client, "Here is some inspiration for the day:")
+  send_slack_msg(client, random.choice(GREETINGS))
   send_slack_img(client, img_url)
 
 
